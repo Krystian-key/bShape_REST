@@ -37,7 +37,6 @@ class BodyTypeServiceImplTest {
     private BodyTypeServiceImpl bodyTypeService;
 
 
-
     @Test
     void shouldThrowExceptionDuringUpdate() {
 
@@ -126,7 +125,7 @@ class BodyTypeServiceImplTest {
     }
 
     @Test
-    void shouldThrowExceptionDuringDeleteById(){
+    void shouldThrowExceptionDuringDeleteById() {
 
         doThrow(EmptyResultDataAccessException.class).when(bodyTypeRepository).deleteById(any());
         assertThatThrownBy(() -> bodyTypeService.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);

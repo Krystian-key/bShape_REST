@@ -1,15 +1,11 @@
 package com.rest.bshape.bodytype;
 
-import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.bodytype.domain.BodyTypeDTO;
 import com.rest.bshape.bodytype.domain.BodyTypeID;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 import static com.rest.bshape.bodytype.converter.BodyTypeConverter.*;
@@ -17,8 +13,7 @@ import static com.rest.bshape.bodytype.converter.BodyTypeConverter.*;
 @RestController
 @RequestMapping("/api/body-type")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
 @CrossOrigin(origins = "http://localhost:4200")
-@RequiredArgsConstructor
-        // zamiast contruktora
+@RequiredArgsConstructor // zamiast contruktora
 class BodyTypeController {
 
     private final BodyTypeService bodyTypeService;
@@ -53,9 +48,5 @@ class BodyTypeController {
         bodyTypeService.delete(id);
     }
 
-   /* @GetMapping("/page")
-    public Page page(@RequestParam Integer page, @RequestParam Integer size) {
-        return new PageImpl(Collections.emptyList());
-    }*/
 
 }
