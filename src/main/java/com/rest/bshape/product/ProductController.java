@@ -1,46 +1,50 @@
 package com.rest.bshape.product;
 
-import com.rest.bshape.exception.ResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
+
+import com.rest.bshape.product.domain.ProductDTO;
+import com.rest.bshape.product.domain.ProductID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
+import static com.rest.bshape.product.converter.ProductConverter.*;
+
+
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 @CrossOrigin(origins = "http://localhost:4200")
+@RequiredArgsConstructor
 class ProductController {
 
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
-
     @GetMapping
     public List<ProductDTO> findAll() {
-        return this.productService.findAll();
+
+        return mapToListDto(productService.findAll());
     }
 
-
     @GetMapping("/{id}")
-    public ProductDTO findById(@PathVariable(value = "id") Long id) {
-        return productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id :" + id));
+    public ProductDTO findById(@PathVariable Long id) {
+        return convertToDTO(productService.findById(id));
+
     }
 
     @PostMapping
-    public ProductID create(@RequestBody ProductDTO productDTO) {
-        return productService.create(productDTO).orElseThrow(() -> new ResourceNotFoundException("Product not created"));
+    public ProductID create(@RequestBody @Valid ProductDTO productDTO) {
+        return productService.create(convertFromDTO(productDTO));
     }
 
 
     @PutMapping("/{id}")
-    public ProductDTO update(@RequestBody ProductDTO productDTO, @PathVariable("id") Long id) {
-        return productService.update(productDTO, id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id :" + id));
+    public ProductDTO update(@RequestBody ProductDTO productDTO, @PathVariable Long id) {
+        return convertToDTO(productService.update(convertFromDTO(productDTO), id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProductID> delete(@PathVariable("id") Long id) {
-        return this.productService.delete(id);
+    public void delete(@PathVariable Long id) {
+        productService.delete(id);
     }
 }

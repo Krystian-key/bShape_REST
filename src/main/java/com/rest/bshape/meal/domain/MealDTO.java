@@ -1,6 +1,6 @@
 package com.rest.bshape.meal.domain;
 
-import com.rest.bshape.product.ProductDTO;
+import com.rest.bshape.product.domain.ProductDTO;
 import lombok.*;
 
 import java.util.List;

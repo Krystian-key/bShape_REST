@@ -1,4 +1,4 @@
-package com.rest.bshape.product;
+package com.rest.bshape.product.domain;
 
 import lombok.*;
 

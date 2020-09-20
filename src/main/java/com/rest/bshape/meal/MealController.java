@@ -31,7 +31,7 @@ class MealController {
     }
 
     @PostMapping
-    public MealID create(@RequestBody MealDTO mealDTO) { //valid = włącza walidacje na klasie dto
+    public MealID create(@RequestBody @Valid MealDTO mealDTO) { //valid = włącza walidacje na klasie dto
         return mealService.create(convertFromDTO(mealDTO));
     }
 
