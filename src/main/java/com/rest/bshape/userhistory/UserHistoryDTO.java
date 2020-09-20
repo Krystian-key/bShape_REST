@@ -2,7 +2,7 @@ package com.rest.bshape.userhistory;
 
 import com.rest.bshape.bodytype.domain.BodyTypeDTO;
 import com.rest.bshape.meal.domain.MealDTO;
-import com.rest.bshape.target.TargetDTO;
+import com.rest.bshape.target.domain.TargetDTO;
 import com.rest.bshape.typeofmeal.TypeOfMealDTO;
 import com.rest.bshape.user.UserDTO;
 import lombok.AllArgsConstructor;

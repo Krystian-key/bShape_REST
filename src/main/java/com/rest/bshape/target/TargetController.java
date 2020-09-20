@@ -1,46 +1,52 @@
 package com.rest.bshape.target;
 
-import com.rest.bshape.exception.ResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
+
+import com.rest.bshape.target.domain.TargetDTO;
+import com.rest.bshape.target.domain.TargetID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
+import static com.rest.bshape.target.converter.TargetConverter.*;
+
+
 @RestController
-@RequestMapping("/target")
+@RequestMapping("/api/target")
 @CrossOrigin(origins = "http://localhost:4200")
+@RequiredArgsConstructor
 class TargetController {
 
     private final TargetService targetService;
 
-    public TargetController(TargetService targetService) {
-        this.targetService = targetService;
-    }
 
     @GetMapping
     public List<TargetDTO> findAll() {
-        return this.targetService.findAll();
+        return mapToListDto(targetService.findAll());
     }
 
 
     @GetMapping("/{id}")
-    public TargetDTO findById(@PathVariable(value = "id") Long id) {
-        return targetService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Target not found with id :" + id));
+    public TargetDTO findById(@PathVariable Long id) {
+        return convertToDTO(targetService.findById(id));
+
     }
 
     @PostMapping
-    public TargetID create(@RequestBody TargetDTO targetDTO) {
-        return targetService.create(targetDTO).orElseThrow(() -> new ResourceNotFoundException("Target not created"));
+    public TargetID create(@RequestBody @Valid TargetDTO targetDTO) {
+        return targetService.create(convertFromDTO(targetDTO));
     }
 
 
     @PutMapping("/{id}")
-    public TargetDTO update(@RequestBody TargetDTO targetDTO, @PathVariable("id") Long id) {
-        return targetService.update(targetDTO, id).orElseThrow(() -> new ResourceNotFoundException("Target not found with id :" + id));
+    public TargetDTO update(@RequestBody TargetDTO targetDTO, @PathVariable Long id) {
+        return convertToDTO(targetService.update(convertFromDTO(targetDTO), id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<TargetID> delete(@PathVariable("id") Long id) {
-        return this.targetService.delete(id);
+    public void delete(@PathVariable Long id) {
+        targetService.delete(id);
     }
+
 }
