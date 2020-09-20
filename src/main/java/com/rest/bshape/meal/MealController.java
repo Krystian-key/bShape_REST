@@ -11,7 +11,7 @@ import java.util.List;
 import static com.rest.bshape.meal.converter.MealConverter.*;
 
 @RestController
-@RequestMapping("/api/body-type")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
+@RequestMapping("/api/meal")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
 @CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 class MealController {
@@ -31,7 +31,7 @@ class MealController {
     }
 
     @PostMapping
-    public MealID create(@RequestBody @Valid MealDTO mealDTO) { //valid = włącza walidacje na klasie dto
+    public MealID create(@RequestBody MealDTO mealDTO) { //valid = włącza walidacje na klasie dto
         return mealService.create(convertFromDTO(mealDTO));
     }
 

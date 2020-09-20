@@ -26,16 +26,6 @@ public class GlobalExceptionController {
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
-    // handling global exception
-  /*  @ExceptionHandler(Exception.class) // brała kazdy wyjątek i zagłuszała je :(
-    public ResponseEntity<?> globalExceptionHandling(Exception exception, WebRequest request) {
-        log.error(exception.getMessage(), exception);
-        ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-    }*/
-
-
     /*  @ExceptionHandler(Exception.class)*/ // brała kazdy wyjątek i zagłuszała je :(
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
