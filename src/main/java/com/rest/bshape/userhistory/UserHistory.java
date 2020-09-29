@@ -1,8 +1,8 @@
 package com.rest.bshape.userhistory;
 
 import com.rest.bshape.bodytype.domain.BodyType;
-import com.rest.bshape.meal.Meal;
-import com.rest.bshape.target.Target;
+import com.rest.bshape.meal.domain.Meal;
+import com.rest.bshape.target.domain.Target;
 import com.rest.bshape.typeofmeal.TypeOfMeal;
 import com.rest.bshape.user.domain.User;
 import lombok.*;

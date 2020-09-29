@@ -1,12 +1,12 @@
-package com.rest.bshape.product;
+package com.rest.bshape.product.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {

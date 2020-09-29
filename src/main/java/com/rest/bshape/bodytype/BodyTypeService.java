@@ -11,7 +11,7 @@ public interface BodyTypeService {
 
      BodyType findById(Long id);
 
-     BodyTypeID create(BodyType bodyType); // sprawdzić //
+     BodyTypeID create(BodyType bodyType);
 
      BodyType update(BodyType bodyType, Long id);
 

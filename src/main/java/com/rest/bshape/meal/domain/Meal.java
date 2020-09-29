@@ -1,6 +1,6 @@
-package com.rest.bshape.meal;
+package com.rest.bshape.meal.domain;
 
-import com.rest.bshape.product.Product;
+import com.rest.bshape.product.domain.Product;
 import lombok.*;
 
 import javax.persistence.*;

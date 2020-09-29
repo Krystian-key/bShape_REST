@@ -1,15 +1,12 @@
-package com.rest.bshape.meal;
+package com.rest.bshape.meal.domain;
 
-import com.rest.bshape.product.ProductDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.rest.bshape.product.domain.ProductDTO;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class MealDTO {

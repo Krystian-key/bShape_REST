@@ -30,14 +30,13 @@ public class BodyTypeServiceImpl implements BodyTypeService {
                 .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
     }
 
-    // usunalem Optionala z metody Create
     @Override
     public BodyTypeID create(BodyType bodyType) {
         bodyType = bodyTypeRepository.save(bodyType);
         return new BodyTypeID(bodyType.getId());
     }
 
-    // ponownie usunąlem optional
+
     @Override
     public BodyType update(BodyType bodyType, Long id) {
 
@@ -48,19 +47,11 @@ public class BodyTypeServiceImpl implements BodyTypeService {
         return bodyTypeRepository.save(bodyTypeById);
     }
 
-    // usunalem defaultowa metode ze springa
+
     @Override
     public void delete(Long id) {
-     /*   BodyType existingBodyType = this.bodyTypeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("BodyType not found with id:" + id));*/
-        System.out.println("test");
         this.bodyTypeRepository.deleteById(id);
     }
 
- /*   @Override
-    public void delete(Long id) {
-        this.bodyTypeRepository.deleteById(id);
-    }
-*/
 
 }
