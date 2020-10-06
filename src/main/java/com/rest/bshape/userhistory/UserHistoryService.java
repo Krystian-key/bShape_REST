@@ -12,7 +12,7 @@ public interface UserHistoryService {
 
     List<UserHistory> findAll();
 
-    BodyType findById(Long id);
+    UserHistory findById(Long id);
 
     UserHistoryID create(UserHistory userHistory);
 

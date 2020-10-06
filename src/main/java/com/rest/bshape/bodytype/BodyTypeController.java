@@ -1,9 +1,7 @@
 package com.rest.bshape.bodytype;
 
-import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.bodytype.domain.BodyTypeDTO;
 import com.rest.bshape.bodytype.domain.BodyTypeID;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,15 +12,17 @@ import static com.rest.bshape.bodytype.converter.BodyTypeConverter.*;
 @RestController
 @RequestMapping("/api/body-type")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
 @CrossOrigin(origins = "http://localhost:4200")
-@RequiredArgsConstructor // zamiast contruktora
 class BodyTypeController {
 
     private final BodyTypeService bodyTypeService;
 
-    
+    BodyTypeController(BodyTypeService bodyTypeService) {
+        this.bodyTypeService = bodyTypeService;
+    }
+
+
     @GetMapping
     public List<BodyTypeDTO> findAll() {
-
         return mapToListDto(bodyTypeService.findAll());
     }
 
