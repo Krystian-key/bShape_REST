@@ -5,18 +5,19 @@ import com.rest.bshape.meal.domain.MealDTO;
 import com.rest.bshape.target.domain.TargetDTO;
 import com.rest.bshape.typeofmeal.TypeOfMealDTO;
 import com.rest.bshape.user.UserDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Setter
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of="id")
 public class UserHistoryDTO {
 
     private Long id;
