@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class UserHistoryConverter {
 
+    private UserHistoryConverter() {
+    }
+
     public static UserHistoryDTO convertToDTO(UserHistory userHistory) {
         return UserHistoryDTO.builder()
                 .id(userHistory.getId())
