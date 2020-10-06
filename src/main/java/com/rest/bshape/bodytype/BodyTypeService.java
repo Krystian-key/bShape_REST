@@ -7,6 +7,7 @@ import com.rest.bshape.bodytype.domain.BodyTypeID;
 import java.util.List;
 
 public interface BodyTypeService {
+
      List<BodyType> findAll();
 
      BodyType findById(Long id);

@@ -13,6 +13,7 @@ import java.util.List;
 public class BodyTypeServiceImpl implements BodyTypeService {
 
     private final BodyTypeRepository bodyTypeRepository;
+    private static final String MESSAGE_ERO_NOT_FOUND= "BodyType not found with id :";
 
     public BodyTypeServiceImpl(BodyTypeRepository bodyTypeRepository) {
         this.bodyTypeRepository = bodyTypeRepository;
@@ -20,14 +21,14 @@ public class BodyTypeServiceImpl implements BodyTypeService {
 
     @Override
     public List<BodyType> findAll() {
-        return this.bodyTypeRepository.findAll();
+        return bodyTypeRepository.findAll();
 
     }
 
     @Override
     public BodyType findById(Long id) {
         return bodyTypeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
+                .orElseThrow(() -> new EntityNotFoundException(MESSAGE_ERO_NOT_FOUND + id));
     }
 
     @Override
@@ -41,7 +42,7 @@ public class BodyTypeServiceImpl implements BodyTypeService {
     public BodyType update(BodyType bodyType, Long id) {
 
         BodyType bodyTypeById = bodyTypeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
+                .orElseThrow(() -> new EntityNotFoundException(MESSAGE_ERO_NOT_FOUND + id));
 
         bodyTypeById.setTypeOfBody(bodyType.getTypeOfBody());
         return bodyTypeRepository.save(bodyTypeById);
@@ -50,7 +51,7 @@ public class BodyTypeServiceImpl implements BodyTypeService {
 
     @Override
     public void delete(Long id) {
-        this.bodyTypeRepository.deleteById(id);
+        bodyTypeRepository.deleteById(id);
     }
 
 
