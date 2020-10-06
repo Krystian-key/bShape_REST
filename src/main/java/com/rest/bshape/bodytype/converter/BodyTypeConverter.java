@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 public class BodyTypeConverter {
 
 
+    private BodyTypeConverter() {
+    }
+
     public static BodyTypeDTO convertToDTO(BodyType bodyType) {
         return BodyTypeDTO.builder()
                 .id(bodyType.getId())

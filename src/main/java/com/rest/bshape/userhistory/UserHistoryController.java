@@ -2,6 +2,7 @@ package com.rest.bshape.userhistory;
 
 import com.rest.bshape.userhistory.domain.UserHistoryDTO;
 import com.rest.bshape.userhistory.domain.UserHistoryID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,7 +13,7 @@ import static com.rest.bshape.userhistory.converter.UserHistoryConverter.*;
 @RestController
 @RequestMapping("/api/user-history")
 @CrossOrigin(origins = "http://localhost:4200")
-public class UserHistoryController {
+class UserHistoryController {
 
     private final UserHistoryService userHistoryService;
 

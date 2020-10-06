@@ -1,13 +1,11 @@
 package com.rest.bshape.userhistory;
 
-import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.userhistory.domain.UserHistory;
 import com.rest.bshape.userhistory.domain.UserHistoryID;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface UserHistoryService {
 
     List<UserHistory> findAll();

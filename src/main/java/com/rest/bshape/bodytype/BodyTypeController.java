@@ -12,6 +12,7 @@ import static com.rest.bshape.bodytype.converter.BodyTypeConverter.*;
 @RestController
 @RequestMapping("/api/body-type")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
 @CrossOrigin(origins = "http://localhost:4200")
+//@RequiredArgsConstructor // zamiast contruktora
 class BodyTypeController {
 
     private final BodyTypeService bodyTypeService;
@@ -23,6 +24,7 @@ class BodyTypeController {
 
     @GetMapping
     public List<BodyTypeDTO> findAll() {
+
         return mapToListDto(bodyTypeService.findAll());
     }
 

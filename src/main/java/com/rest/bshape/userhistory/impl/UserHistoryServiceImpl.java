@@ -1,20 +1,19 @@
 package com.rest.bshape.userhistory.impl;
 
-import com.rest.bshape.bodytype.domain.BodyType;
-import com.rest.bshape.bodytype.domain.BodyTypeID;
 import com.rest.bshape.userhistory.UserHistoryRepository;
 import com.rest.bshape.userhistory.UserHistoryService;
 import com.rest.bshape.userhistory.domain.UserHistory;
 import com.rest.bshape.userhistory.domain.UserHistoryID;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.LocalDate;
 import java.util.List;
 
+@Service
 class UserHistoryServiceImpl implements UserHistoryService {
 
     private final UserHistoryRepository userHistoryRepository;
-    private static final String MESSAGE_ERO_NOT_FOUND= "UserHistory not found with id :";
+    private static final String MESSAGE_ERO_NOT_FOUND = "UserHistory not found with id :";
 
     UserHistoryServiceImpl(UserHistoryRepository userHistoryRepository) {
         this.userHistoryRepository = userHistoryRepository;
