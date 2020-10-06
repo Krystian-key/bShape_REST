@@ -1,4 +1,4 @@
-package com.rest.bshape.userhistory;
+package com.rest.bshape.userhistory.domain;
 
 import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.meal.domain.Meal;

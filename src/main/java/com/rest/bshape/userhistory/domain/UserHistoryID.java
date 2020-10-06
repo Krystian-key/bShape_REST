@@ -1,4 +1,4 @@
-package com.rest.bshape.userhistory;
+package com.rest.bshape.userhistory.domain;
 
 import lombok.Builder;
 import lombok.Getter;

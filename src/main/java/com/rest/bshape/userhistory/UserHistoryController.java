@@ -1,6 +1,8 @@
 package com.rest.bshape.userhistory;
 
 import com.rest.bshape.exception.ResourceNotFoundException;
+import com.rest.bshape.userhistory.domain.UserHistoryDTO;
+import com.rest.bshape.userhistory.domain.UserHistoryID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

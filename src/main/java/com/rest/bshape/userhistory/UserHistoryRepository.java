@@ -1,5 +1,6 @@
 package com.rest.bshape.userhistory;
 
+import com.rest.bshape.userhistory.domain.UserHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
