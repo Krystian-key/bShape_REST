@@ -1,4 +1,4 @@
-package com.rest.bshape.typeofmeal.domain;
+package com.rest.bshape.typeofmeal;
 
 import lombok.*;
 

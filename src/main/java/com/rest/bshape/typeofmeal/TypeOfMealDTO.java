@@ -1,4 +1,4 @@
-package com.rest.bshape.typeofmeal.domain;
+package com.rest.bshape.typeofmeal;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 @Builder
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class TypeOfMealDTO {
 
     private Long id;
