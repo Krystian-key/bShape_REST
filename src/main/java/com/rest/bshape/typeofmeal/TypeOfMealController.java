@@ -1,51 +1,45 @@
 package com.rest.bshape.typeofmeal;
 
-import com.rest.bshape.typeofmeal.domain.TypeOfMealDTO;
-import com.rest.bshape.typeofmeal.domain.TypeOfMealID;
-import lombok.RequiredArgsConstructor;
+import com.rest.bshape.exception.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
-import static com.rest.bshape.typeofmeal.converter.TypeOfMealConverter.*;
-
-
 @RestController
-@RequestMapping("/api/type-of-meal")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
+@RequestMapping("/typeOfMeals")
 @CrossOrigin(origins = "http://localhost:4200")
-@RequiredArgsConstructor
 public class TypeOfMealController {
 
     private final TypeOfMealService typeOfMealService;
 
+    public TypeOfMealController(TypeOfMealService typeOfMealService) {
+        this.typeOfMealService = typeOfMealService;
+    }
 
     @GetMapping
     public List<TypeOfMealDTO> findAll() {
-
-        return mapToListDto(typeOfMealService.findAll());
+        return this.typeOfMealService.findAll();
     }
 
-
     @GetMapping("/{id}")
-    public TypeOfMealDTO findById(@PathVariable Long id) {  // nie muszę pisac value=id poniewaz nazwa zmiennej oznaczona adnotacją pathVariable jest taka sama jak nazwa zmiennej w klamnrach z 26
-        return convertToDTO(typeOfMealService.findById(id));
-
+    public TypeOfMealDTO findById(@PathVariable(value = "id") Long id) {
+        return typeOfMealService.findById(id).orElseThrow(() -> new ResourceNotFoundException("TypeOfMeal not found with id :" + id));
     }
 
     @PostMapping
-    public TypeOfMealID create(@RequestBody @Valid TypeOfMealDTO typeOfMealDTO) { //valid = włącza walidacje na klasie dto
-        return typeOfMealService.create(convertFromDTO(typeOfMealDTO));
+    public TypeOfMealID create(@RequestBody TypeOfMealDTO typeOfMealDTO) {
+        return typeOfMealService.create(typeOfMealDTO).orElseThrow(() -> new ResourceNotFoundException("TypeOfMeal not created"));
     }
 
 
     @PutMapping("/{id}")
-    public TypeOfMealDTO update(@RequestBody TypeOfMealDTO typeOfMealDTO, @PathVariable Long id) {
-        return convertToDTO(typeOfMealService.update(convertFromDTO(typeOfMealDTO), id));
+    public TypeOfMealDTO update(@RequestBody TypeOfMealDTO metypeOfMealDTOlDTO, @PathVariable("id") Long id) {
+        return typeOfMealService.update(metypeOfMealDTOlDTO, id).orElseThrow(() -> new ResourceNotFoundException("TypeOfMeal not found with id :" + id));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        typeOfMealService.delete(id);
+    public ResponseEntity<TypeOfMealID> delete(@PathVariable("id") Long id) {
+        return this.typeOfMealService.delete(id);
     }
 }
