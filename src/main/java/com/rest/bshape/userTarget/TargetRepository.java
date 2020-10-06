@@ -1,6 +1,5 @@
-package com.rest.bshape.target;
+package com.rest.bshape.userTarget;
 
-import com.rest.bshape.target.domain.Target;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
