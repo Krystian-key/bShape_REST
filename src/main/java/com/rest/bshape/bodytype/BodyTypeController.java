@@ -1,6 +1,5 @@
 package com.rest.bshape.bodytype;
 
-import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.bodytype.domain.BodyTypeDTO;
 import com.rest.bshape.bodytype.domain.BodyTypeID;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ class BodyTypeController {
 
     private final BodyTypeService bodyTypeService;
 
-    
+
     @GetMapping
     public List<BodyTypeDTO> findAll() {
 
