@@ -2,7 +2,6 @@ package com.rest.bshape.userhistory;
 
 import com.rest.bshape.userhistory.domain.UserHistoryDTO;
 import com.rest.bshape.userhistory.domain.UserHistoryID;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
