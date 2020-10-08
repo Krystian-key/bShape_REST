@@ -1,6 +1,4 @@
-package com.rest.bshape.userTarget;
-
-
+package com.rest.bshape.usertarget.domain;
 
 import lombok.*;
 
@@ -15,7 +13,7 @@ import javax.persistence.Id;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of = "id")
 public class UserTarget {
 
     @Id

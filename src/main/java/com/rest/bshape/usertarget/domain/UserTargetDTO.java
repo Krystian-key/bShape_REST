@@ -1,12 +1,12 @@
-package com.rest.bshape.userTarget;
+package com.rest.bshape.usertarget.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserTargetDTO {

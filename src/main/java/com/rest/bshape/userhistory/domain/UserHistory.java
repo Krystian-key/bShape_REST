@@ -2,10 +2,9 @@ package com.rest.bshape.userhistory.domain;
 
 import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.meal.domain.Meal;
-import com.rest.bshape.userTarget.UserTarget;
+import com.rest.bshape.usertarget.domain.UserTarget;
 import com.rest.bshape.typeofmeal.TypeOfMeal;
 import com.rest.bshape.user.domain.User;
-import com.rest.bshape.userTarget.UserTarget;
 import lombok.*;
 
 import javax.persistence.*;
