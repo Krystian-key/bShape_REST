@@ -1,10 +1,11 @@
-package com.rest.bshape.userhistory;
+package com.rest.bshape.userhistory.domain;
 
 import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.meal.domain.Meal;
-import com.rest.bshape.userTarget.domain.Target;
+import com.rest.bshape.userTarget.UserTarget;
 import com.rest.bshape.typeofmeal.TypeOfMeal;
 import com.rest.bshape.user.domain.User;
+import com.rest.bshape.userTarget.UserTarget;
 import lombok.*;
 
 import javax.persistence.*;
@@ -50,6 +51,6 @@ public class UserHistory {
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private TypeOfMeal typeOfMeals;
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    private Target targets;
+    private UserTarget targets;
 
 }
