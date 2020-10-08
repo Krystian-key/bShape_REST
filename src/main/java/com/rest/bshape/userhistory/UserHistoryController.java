@@ -1,15 +1,19 @@
 package com.rest.bshape.userhistory;
 
-import com.rest.bshape.exception.ResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
+import com.rest.bshape.userhistory.domain.UserHistoryDTO;
+import com.rest.bshape.userhistory.domain.UserHistoryID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
+import static com.rest.bshape.userhistory.converter.UserHistoryConverter.*;
+
 @RestController
-@RequestMapping("/userHistory")
+@RequestMapping("/api/user-history")
 @CrossOrigin(origins = "http://localhost:4200")
-public class UserHistoryController {
+class UserHistoryController {
 
     private final UserHistoryService userHistoryService;
 
@@ -19,28 +23,28 @@ public class UserHistoryController {
 
     @GetMapping
     public List<UserHistoryDTO> findAll() {
-        return this.userHistoryService.findAll();
+        return mapToListDto(userHistoryService.findAll());
     }
 
 
     @GetMapping("/{id}")
-    public UserHistoryDTO findById(@PathVariable(value = "id") Long id) {
-        return userHistoryService.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserHistory not found with id :" + id));
+    public UserHistoryDTO findById(@PathVariable Long id) {
+        return convertToDTO(userHistoryService.findById(id));
     }
 
     @PostMapping
-    public UserHistoryID create(@RequestBody UserHistoryDTO userHistoryDTO) {
-        return userHistoryService.create(userHistoryDTO).orElseThrow(() -> new ResourceNotFoundException("UserHistory not created"));
+    public UserHistoryID create(@RequestBody @Valid UserHistoryDTO userHistoryDTO) {
+        return userHistoryService.create(convertFromDTO(userHistoryDTO));
     }
 
 
     @PutMapping("/{id}")
     public UserHistoryDTO update(@RequestBody UserHistoryDTO userHistoryDTO, @PathVariable("id") Long id) {
-        return userHistoryService.update(userHistoryDTO, id).orElseThrow(() -> new ResourceNotFoundException("UserHistory not found with id :" + id));
+        return convertToDTO(userHistoryService.update(convertFromDTO(userHistoryDTO), id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserHistoryID> delete(@PathVariable("id") Long id) {
-        return this.userHistoryService.delete(id);
+    public void delete(@PathVariable Long id) {
+        userHistoryService.delete(id);
     }
 }

@@ -1,10 +1,10 @@
-package com.rest.bshape.userhistory;
+package com.rest.bshape.userhistory.domain;
 
 import com.rest.bshape.bodytype.domain.BodyTypeDTO;
 import com.rest.bshape.meal.domain.MealDTO;
-import com.rest.bshape.userTarget.domain.TargetDTO;
 import com.rest.bshape.typeofmeal.TypeOfMealDTO;
 import com.rest.bshape.user.UserDTO;
+import com.rest.bshape.userTarget.UserTargetDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserHistoryDTO {
@@ -44,6 +44,6 @@ public class UserHistoryDTO {
 
     private TypeOfMealDTO typeOfMealDTO;
 
-    private TargetDTO targetDTO;
+    private UserTargetDTO targetDTO;
 
 }
