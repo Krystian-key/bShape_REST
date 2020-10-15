@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id :" + id));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
     public Product update(Product product, Long id) {
 
         Product productById = productRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id :" + id));
 
         productById.setName(product.getName());
         productById.setWeight(product.getWeight());

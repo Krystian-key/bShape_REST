@@ -1,35 +1,29 @@
 package com.rest.bshape.product.impl;
 
-import com.rest.bshape.bodytype.BodyTypeRepository;
-import com.rest.bshape.bodytype.domain.BodyType;
-import com.rest.bshape.bodytype.impl.BodyTypeServiceImpl;
 import com.rest.bshape.product.ProductRepository;
-import com.rest.bshape.product.ProductService;
 import com.rest.bshape.product.domain.Product;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
+import com.rest.bshape.product.domain.ProductID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
+import org.springframework.dao.EmptyResultDataAccessException;
 
-import java.util.*;
+import javax.persistence.EntityNotFoundException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceImplTest {
+
     @Mock
     private ProductRepository productRepository;
 
@@ -45,15 +39,27 @@ class ProductServiceImplTest {
     }
 
     @Test
-    void  shouldFindProductById() {
+    void shouldReturnProductForFindById() {
+        Product product = new Product();
+        given(productRepository.findById(1L)).willReturn(Optional.of(product));
+
+        Product result = productService.findById(1L);
+        assertThat(result).isEqualTo(product);
+
     }
 
     @Test
-    void  shouldCreateProduct() {
+    void shouldCreateProduct() {
+        Product product = new Product();
+        product.setId(1L);
+        given(productRepository.save(any())).willReturn(product);
+
+        ProductID result = productService.create(product);
+        assertThat(result).isEqualTo(new ProductID(1L));
     }
 
     @Test
-    void  shouldUpdateProduct() {
+    void shouldUpdateProduct() {
         Product product = new Product();
         given(productRepository.save(any())).willReturn(product);
         given(productRepository.findById(1L)).willReturn(Optional.of(product));
@@ -66,6 +72,41 @@ class ProductServiceImplTest {
     void shouldDeleteProduct() {
         doNothing().when(productRepository).deleteById(any());
         productService.delete(1L);
-        verify(productRepository,times(1)).deleteById(1L);
+        verify(productRepository, times(1)).deleteById(1L);
     }
+
+    @Test
+    void shouldThrowExceptionDuringUpdate() {
+
+        given(productRepository.findById(1L)).willReturn(Optional.empty());
+        Product product = Product.builder()
+                .id(1L)
+                .build();
+
+        Long id = 1L;
+        Product productParam = new Product();
+
+        assertThatThrownBy(() -> productService.update(productParam, id))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessage("Product not found with id :1");
+    }
+
+    @Test
+    void shouldFindEmptyProductList() {
+        given(productRepository.findAll()).willReturn(Collections.emptyList());
+
+        List<Product> result = productService.findAll();
+        assertThat(result).isEmpty();
+    }
+
+
+    @Test
+    void shouldThrowExceptionDuringDeleteById() {
+
+        doThrow(EmptyResultDataAccessException.class).when(productRepository).deleteById(any());
+        assertThatThrownBy(() -> productService.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
+
+
+    }
+
 }
