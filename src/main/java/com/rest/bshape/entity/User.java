@@ -1,73 +1,56 @@
 package com.rest.bshape.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Setter
+@Getter
 public class User {
-    private String userType;
-    private int id;
-    private String phoneNumber;
-    private String name;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotEmpty
+    @Size(min = 3)
+    private String firstName;
+
+    @NotEmpty
+    @Size(min = 2)
     private String lastName;
 
-    public User(String userType) {
-        this.userType = userType;
-    }
+    @NotNull
+    private Integer age;
 
-    public String getUserType() {
-        return userType;
-    }
+    @NotNull
+    private Double weight;
 
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
+    @NotNull
+    private Double height;
 
-    public User() {
-    }
+    @NotNull
+    private Integer sex;
 
-    public User(int id, String phoneNumber, String name, String lastName) {
-        this.id = id;
-        this.phoneNumber = phoneNumber;
-        this.name = name;
-        this.lastName = lastName;
-    }
+    @NotNull
+    @Size(min = 6)
+    private String password;
 
-    public int getId() {
-        return id;
-    }
+    @Email
+    @NotNull
+    @Size(min = 5, max = 30)
+    private String email;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    private BodyType bodyType;
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
 }
+
