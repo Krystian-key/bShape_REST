@@ -27,7 +27,7 @@ public class TypeOfMealServiceImpl implements TypeOfMealService {
     @Override
     public TypeOfMeal findById(Long id) {
         return typeOfMealRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
+                .orElseThrow(() -> new EntityNotFoundException("Type of meal not found with id :" + id));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TypeOfMealServiceImpl implements TypeOfMealService {
     public TypeOfMeal update(TypeOfMeal typeOfMeal, Long id) {
 
         TypeOfMeal typeOfMealById = typeOfMealRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
+                .orElseThrow(() -> new EntityNotFoundException("Type of meal not found with id :" + id));
 
         typeOfMealById.setTypeMeals(typeOfMeal.getTypeMeals());
         return typeOfMealRepository.save(typeOfMealById);
