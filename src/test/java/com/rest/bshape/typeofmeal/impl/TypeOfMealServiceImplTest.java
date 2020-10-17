@@ -1,5 +1,6 @@
 package com.rest.bshape.typeofmeal.impl;
 
+import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.typeofmeal.TypeOfMealRepository;
 import com.rest.bshape.typeofmeal.domain.TypeOfMeal;
 import com.rest.bshape.typeofmeal.domain.TypeOfMealID;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
@@ -89,4 +91,22 @@ class TypeOfMealServiceImplTest {
         typeOfMealService.delete(1L);
         verify(typeOfMealRepository, times(1)).deleteById(1L);
     }
+    @Test
+    void shouldFindEmptyBodyTypes() {
+        given(typeOfMealRepository.findAll()).willReturn(Collections.emptyList());
+
+        List<TypeOfMeal> result = typeOfMealService.findAll();
+        assertThat(result).isEmpty();
+
+    }
+
+    @Test
+    void shouldThrowExceptionDuringDeleteById() {
+
+        doThrow(EmptyResultDataAccessException.class).when(typeOfMealRepository).deleteById(any());
+        assertThatThrownBy(() -> typeOfMealService.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
+
+
+    }
+
 }
