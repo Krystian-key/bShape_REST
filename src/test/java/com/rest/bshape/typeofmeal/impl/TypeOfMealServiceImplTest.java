@@ -8,7 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.dao.EmptyResultDataAccessException;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
@@ -32,6 +31,8 @@ class TypeOfMealServiceImplTest {
     void shouldThrowExceptionDuringUpdate() {
 
         given(typeOfMealRepository.findById(1L)).willReturn(Optional.empty());
+        TypeOfMeal typeOfMeal = new TypeOfMeal();
+
         Long id = 1L;
         TypeOfMeal typeOfMealParam = TypeOfMeal.builder()
                 .id(1L)
@@ -44,6 +45,14 @@ class TypeOfMealServiceImplTest {
     }
 
     @Test
+    void shouldFindAllTypesOfMeal() {
+        TypeOfMeal typeOfMeal = new TypeOfMeal();
+        given(typeOfMealRepository.findAll()).willReturn(Collections.singletonList(typeOfMeal));
+        List<TypeOfMeal> result = typeOfMealService.findAll();
+        assertThat(result).hasSize(1).contains(typeOfMeal);
+    }
+
+    @Test
     void shouldReturnTypeOfMealForFindById() {
         TypeOfMeal typeOfMeal = new TypeOfMeal();
         given(typeOfMealRepository.findById(1L)).willReturn(Optional.of(typeOfMeal));
@@ -51,14 +60,6 @@ class TypeOfMealServiceImplTest {
         TypeOfMeal result = typeOfMealService.findById(1L);
         assertThat(result).isEqualTo(typeOfMeal);
 
-    }
-
-    @Test
-    void shouldFindAllTypesOfMeal() {
-        TypeOfMeal typeOfMeal = new TypeOfMeal();
-        given(typeOfMealRepository.findAll()).willReturn(Collections.singletonList(typeOfMeal));
-        List<TypeOfMeal> result = typeOfMealService.findAll();
-        assertThat(result).hasSize(1).contains(typeOfMeal);
     }
 
     @Test
@@ -88,21 +89,4 @@ class TypeOfMealServiceImplTest {
         typeOfMealService.delete(1L);
         verify(typeOfMealRepository, times(1)).deleteById(1L);
     }
-
-    @Test
-    void shouldFindEmptyTypesOfMeal() {
-        given(typeOfMealRepository.findAll()).willReturn(Collections.emptyList());
-
-        List<TypeOfMeal> result = typeOfMealService.findAll();
-        assertThat(result).isEmpty();
-
-    }
-
-    @Test
-    void shouldThrowExceptionDuringDeleteById() {
-
-        doThrow(EmptyResultDataAccessException.class).when(typeOfMealRepository).deleteById(any());
-        assertThatThrownBy(() -> typeOfMealService.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
-    }
-
 }
