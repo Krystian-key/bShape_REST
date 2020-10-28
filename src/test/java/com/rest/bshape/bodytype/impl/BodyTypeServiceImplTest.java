@@ -32,7 +32,7 @@ class BodyTypeServiceImplTest {
     private BodyTypeRepository bodyTypeRepository;
 
     @InjectMocks
-    private BodyTypeServiceImpl bodyTypeService;
+    private BodyTypeServiceImpl bodyTypeServiceImpl;
 
     @Test
     void shouldThrowExceptionDuringUpdate() {
@@ -42,7 +42,7 @@ class BodyTypeServiceImplTest {
 
         BodyType bodyTypeParam = new BodyType(id, "skinny");
 
-        assertThatThrownBy(() -> bodyTypeService.update(bodyTypeParam, id))
+        assertThatThrownBy(() -> bodyTypeServiceImpl.update(bodyTypeParam, id))
                 .isInstanceOf(EntityNotFoundException.class)
                 .hasMessage(message);
     }
@@ -53,7 +53,7 @@ class BodyTypeServiceImplTest {
         given(bodyTypeRepository.save(any())).willReturn(bodyType);
         given(bodyTypeRepository.findById(id)).willReturn(Optional.of(bodyType));
 
-        BodyType result = bodyTypeService.update(bodyType, id);
+        BodyType result = bodyTypeServiceImpl.update(bodyType, id);
         assertThat(result).isEqualTo(bodyType);
     }
 
@@ -62,7 +62,7 @@ class BodyTypeServiceImplTest {
         BodyType bodyType = new BodyType();
         given(bodyTypeRepository.findById(id)).willReturn(Optional.of(bodyType));
 
-        BodyType result = bodyTypeService.findById(id);
+        BodyType result = bodyTypeServiceImpl.findById(id);
         assertThat(result).isEqualTo(bodyType);
     }
 
@@ -71,7 +71,7 @@ class BodyTypeServiceImplTest {
         BodyType bodyType = new BodyType();
         given(bodyTypeRepository.findAll()).willReturn(Collections.singletonList(bodyType));
 
-        List<BodyType> result = bodyTypeService.findAll();
+        List<BodyType> result = bodyTypeServiceImpl.findAll();
         assertThat(result).hasSize(1).contains(bodyType);
     }
 
@@ -79,7 +79,7 @@ class BodyTypeServiceImplTest {
     void shouldFindEmptyBodyTypes() {
         given(bodyTypeRepository.findAll()).willReturn(Collections.emptyList());
 
-        List<BodyType> result = bodyTypeService.findAll();
+        List<BodyType> result = bodyTypeServiceImpl.findAll();
         assertThat(result).isEmpty();
     }
 
@@ -89,7 +89,7 @@ class BodyTypeServiceImplTest {
         bodyType.setId(1L);
         given(bodyTypeRepository.save(any())).willReturn(bodyType);
 
-        BodyTypeID result = bodyTypeService.create(bodyType);
+        BodyTypeID result = bodyTypeServiceImpl.create(bodyType);
         assertThat(result).isEqualTo(new BodyTypeID(1L));
     }
 
@@ -97,7 +97,7 @@ class BodyTypeServiceImplTest {
     void shouldDeleteBodType() {
 
         doNothing().when(bodyTypeRepository).deleteById(any());
-        bodyTypeService.delete(id);
+        bodyTypeServiceImpl.delete(id);
         verify(bodyTypeRepository, times(1)).deleteById(id);
     }
 
@@ -105,6 +105,6 @@ class BodyTypeServiceImplTest {
     void shouldThrowExceptionDuringDeleteById() {
 
         doThrow(EmptyResultDataAccessException.class).when(bodyTypeRepository).deleteById(any());
-        assertThatThrownBy(() -> bodyTypeService.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
+        assertThatThrownBy(() -> bodyTypeServiceImpl.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
     }
 }
