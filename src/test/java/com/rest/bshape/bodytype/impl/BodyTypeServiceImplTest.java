@@ -21,12 +21,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-// Mokckito
-// junit
-// AssertJ
-
 @ExtendWith(MockitoExtension.class)
 class BodyTypeServiceImplTest {
+
+    private final String message = "BodyType not found with id :1";
+
+    private final Long id = 1L;
 
     @Mock
     private BodyTypeRepository bodyTypeRepository;
@@ -34,54 +34,37 @@ class BodyTypeServiceImplTest {
     @InjectMocks
     private BodyTypeServiceImpl bodyTypeService;
 
-
     @Test
     void shouldThrowExceptionDuringUpdate() {
 
-        //given
         given(bodyTypeRepository.findById(1L)).willReturn(Optional.empty());
         BodyType bodyType = new BodyType();
-        /*  given(bodyTypeRepository.save(any())).willReturn(bodyType);*/
 
-        Long id = 1l;
-        BodyType bodyTypeParam = new BodyType(1L, "skinny");
-
-
-        //when
-        /* BodyType result = bodyTypeService.update(bodyTypeParam, id);*/
-
-        //then
-        /* assertThat(result).isEqualTo(BodyType.builder().typeOfBody("skinny").build()); wywali exception czyli jest git*/
+        BodyType bodyTypeParam = new BodyType(id, "skinny");
 
         assertThatThrownBy(() -> bodyTypeService.update(bodyTypeParam, id))
                 .isInstanceOf(EntityNotFoundException.class)
-                .hasMessage("BodyType not found with id :1");
-
+                .hasMessage(message);
     }
 
     @Test
     void shouldUpdateBodyType() {
         BodyType bodyType = new BodyType();
         given(bodyTypeRepository.save(any())).willReturn(bodyType);
-        given(bodyTypeRepository.findById(1L)).willReturn(Optional.of(bodyType));
+        given(bodyTypeRepository.findById(id)).willReturn(Optional.of(bodyType));
 
-        BodyType result = bodyTypeService.update(bodyType, 1L);
+        BodyType result = bodyTypeService.update(bodyType, id);
         assertThat(result).isEqualTo(bodyType);
-
     }
-
 
     @Test
     void shouldReturnValueForFindById() {
         BodyType bodyType = new BodyType();
-        given(bodyTypeRepository.findById(1L)).willReturn(Optional.of(bodyType));
+        given(bodyTypeRepository.findById(id)).willReturn(Optional.of(bodyType));
 
-        BodyType result = bodyTypeService.findById(1L);
+        BodyType result = bodyTypeService.findById(id);
         assertThat(result).isEqualTo(bodyType);
-
     }
-
-    // sprawdza czy lista przyhmuje chociaz 1 obiekt
 
     @Test
     void shouldFindAllBodyTypes() {
@@ -92,14 +75,12 @@ class BodyTypeServiceImplTest {
         assertThat(result).hasSize(1).contains(bodyType);
     }
 
-    // sprawdza czy lista jest pusta
     @Test
     void shouldFindEmptyBodyTypes() {
         given(bodyTypeRepository.findAll()).willReturn(Collections.emptyList());
 
         List<BodyType> result = bodyTypeService.findAll();
         assertThat(result).isEmpty();
-
     }
 
     @Test
@@ -112,14 +93,12 @@ class BodyTypeServiceImplTest {
         assertThat(result).isEqualTo(new BodyTypeID(1L));
     }
 
-
     @Test
     void shouldDeleteBodType() {
 
         doNothing().when(bodyTypeRepository).deleteById(any());
-        bodyTypeService.delete(1L);
-        verify(bodyTypeRepository, times(1)).deleteById(1L);
-
+        bodyTypeService.delete(id);
+        verify(bodyTypeRepository, times(1)).deleteById(id);
     }
 
     @Test
@@ -127,8 +106,5 @@ class BodyTypeServiceImplTest {
 
         doThrow(EmptyResultDataAccessException.class).when(bodyTypeRepository).deleteById(any());
         assertThatThrownBy(() -> bodyTypeService.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
-
-
     }
-
 }
