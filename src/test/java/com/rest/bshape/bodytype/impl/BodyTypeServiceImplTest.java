@@ -1,11 +1,8 @@
 package com.rest.bshape.bodytype.impl;
 
-import java.util.List;
-
 import com.rest.bshape.bodytype.BodyTypeRepository;
 import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.bodytype.domain.BodyTypeID;
-import com.rest.bshape.bodytype.impl.BodyTypeServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,6 +1,5 @@
 package com.rest.bshape.typeofmeal.impl;
 
-import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.typeofmeal.TypeOfMealRepository;
 import com.rest.bshape.typeofmeal.domain.TypeOfMeal;
 import com.rest.bshape.typeofmeal.domain.TypeOfMealID;
@@ -35,12 +34,12 @@ class TypeOfMealServiceImplTest {
         given(typeOfMealRepository.findById(1L)).willReturn(Optional.empty());
         TypeOfMeal typeOfMeal = new TypeOfMeal();
 
-        Long id = 1L;
+        /*Long id = 1L;*/
         TypeOfMeal typeOfMealParam = TypeOfMeal.builder()
                 .id(1L)
                 .build();
 
-        assertThatThrownBy(() -> typeOfMealService.update(typeOfMealParam, id))
+        assertThatThrownBy(() -> typeOfMealService.update(typeOfMealParam, 1L))
                 .isInstanceOf(EntityNotFoundException.class)
                 .hasMessage("Type of meal not found with id :1");
 
@@ -91,6 +90,7 @@ class TypeOfMealServiceImplTest {
         typeOfMealService.delete(1L);
         verify(typeOfMealRepository, times(1)).deleteById(1L);
     }
+
     @Test
     void shouldFindEmptyBodyTypes() {
         given(typeOfMealRepository.findAll()).willReturn(Collections.emptyList());
