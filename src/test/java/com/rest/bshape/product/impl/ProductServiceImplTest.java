@@ -24,89 +24,88 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class ProductServiceImplTest {
 
+    private final String message = "Product not found with id :1";
+
+    private final Long id = 1L;
+
     @Mock
     private ProductRepository productRepository;
 
     @InjectMocks
-    private ProductServiceImpl productService;
+    private ProductServiceImpl productServiceImpl;
 
     @Test
-    void shouldFindAllProducts() {
-        Product product = new Product();
-        given(productRepository.findAll()).willReturn(Collections.singletonList(product));
-        List<Product> result = productService.findAll();
-        assertThat(result).hasSize(1).contains(product);
-    }
+    void shouldThrowExceptionDuringUpdate() {
 
-    @Test
-    void shouldReturnProductForFindById() {
-        Product product = new Product();
-        given(productRepository.findById(1L)).willReturn(Optional.of(product));
+        given(productRepository.findById(id)).willReturn(Optional.empty());
+        Product product = Product.builder()
+                .id(id)
+                .build();
 
-        Product result = productService.findById(1L);
-        assertThat(result).isEqualTo(product);
+        Product productParam = new Product();
 
-    }
-
-    @Test
-    void shouldCreateProduct() {
-        Product product = new Product();
-        product.setId(1L);
-        given(productRepository.save(any())).willReturn(product);
-
-        ProductID result = productService.create(product);
-        assertThat(result).isEqualTo(new ProductID(1L));
+        assertThatThrownBy(() -> productServiceImpl.update(productParam, id))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessage(message);
     }
 
     @Test
     void shouldUpdateProduct() {
         Product product = new Product();
         given(productRepository.save(any())).willReturn(product);
-        given(productRepository.findById(1L)).willReturn(Optional.of(product));
+        given(productRepository.findById(id)).willReturn(Optional.of(product));
 
-        Product result = productService.update(product, 1L);
+        Product result = productServiceImpl.update(product, id);
         assertThat(result).isEqualTo(product);
     }
 
     @Test
-    void shouldDeleteProduct() {
-        doNothing().when(productRepository).deleteById(any());
-        productService.delete(1L);
-        verify(productRepository, times(1)).deleteById(1L);
+    void shouldReturnValueForFindById() {
+        Product product = new Product();
+        given(productRepository.findById(id)).willReturn(Optional.of(product));
+
+        Product result = productServiceImpl.findById(id);
+        assertThat(result).isEqualTo(product);
     }
 
     @Test
-    void shouldThrowExceptionDuringUpdate() {
-
-        given(productRepository.findById(1L)).willReturn(Optional.empty());
-        Product product = Product.builder()
-                .id(1L)
-                .build();
-
-        Long id = 1L;
-        Product productParam = new Product();
-
-        assertThatThrownBy(() -> productService.update(productParam, id))
-                .isInstanceOf(EntityNotFoundException.class)
-                .hasMessage("Product not found with id :1");
+    void shouldFindAllProducts() {
+        Product product = new Product();
+        given(productRepository.findAll()).willReturn(Collections.singletonList(product));
+        List<Product> result = productServiceImpl.findAll();
+        assertThat(result).hasSize(1).contains(product);
     }
 
     @Test
     void shouldFindEmptyProductList() {
         given(productRepository.findAll()).willReturn(Collections.emptyList());
 
-        List<Product> result = productService.findAll();
+        List<Product> result = productServiceImpl.findAll();
         assertThat(result).isEmpty();
     }
 
 
     @Test
+    void shouldCreateProduct() {
+        Product product = new Product();
+        product.setId(id);
+        given(productRepository.save(any())).willReturn(product);
+
+        ProductID result = productServiceImpl.create(product);
+        assertThat(result).isEqualTo(new ProductID(id));
+    }
+
+    @Test
+    void shouldDeleteProduct() {
+        doNothing().when(productRepository).deleteById(any());
+        productServiceImpl.delete(id);
+        verify(productRepository, times(1)).deleteById(id);
+    }
+
+    @Test
     void shouldThrowExceptionDuringDeleteById() {
 
         doThrow(EmptyResultDataAccessException.class).when(productRepository).deleteById(any());
-        assertThatThrownBy(() -> productService.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
-
-
+        assertThatThrownBy(() -> productServiceImpl.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
     }
-
 }

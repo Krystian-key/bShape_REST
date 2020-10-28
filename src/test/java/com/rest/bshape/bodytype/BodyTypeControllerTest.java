@@ -121,14 +121,4 @@ public class BodyTypeControllerTest {
                 .andExpect(status().is(404));
 
     }
-
- /*   @Test
-    void shouldReturnPage() throws Exception {
-        mockMvc.perform(get("/api/body-type/page")
-                .param("page","0")
-                .param("page","10"))
-                .andExpect(status().is(200))
-                .andExpect(jsonPath("$.abc").exists());
-    }*/
-
 }

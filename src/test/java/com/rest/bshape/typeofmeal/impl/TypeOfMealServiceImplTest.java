@@ -1,6 +1,5 @@
 package com.rest.bshape.typeofmeal.impl;
 
-import com.rest.bshape.bodytype.domain.BodyType;
 import com.rest.bshape.typeofmeal.TypeOfMealRepository;
 import com.rest.bshape.typeofmeal.domain.TypeOfMeal;
 import com.rest.bshape.typeofmeal.domain.TypeOfMealID;
@@ -24,89 +23,90 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TypeOfMealServiceImplTest {
+
+    private final String message = "Type of meal not found with id :1";
+
+    private final Long id = 1L;
+
     @Mock
     private TypeOfMealRepository typeOfMealRepository;
+
     @InjectMocks
-    private TypeOfMealServiceImpl typeOfMealService;
+    private TypeOfMealServiceImpl typeOfMealServiceImpl;
 
     @Test
     void shouldThrowExceptionDuringUpdate() {
 
-        given(typeOfMealRepository.findById(1L)).willReturn(Optional.empty());
+        given(typeOfMealRepository.findById(id)).willReturn(Optional.empty());
         TypeOfMeal typeOfMeal = new TypeOfMeal();
 
-        Long id = 1L;
         TypeOfMeal typeOfMealParam = TypeOfMeal.builder()
-                .id(1L)
+                .id(id)
                 .build();
 
-        assertThatThrownBy(() -> typeOfMealService.update(typeOfMealParam, id))
+        assertThatThrownBy(() -> typeOfMealServiceImpl.update(typeOfMealParam, id))
                 .isInstanceOf(EntityNotFoundException.class)
-                .hasMessage("Type of meal not found with id :1");
-
-    }
-
-    @Test
-    void shouldFindAllTypesOfMeal() {
-        TypeOfMeal typeOfMeal = new TypeOfMeal();
-        given(typeOfMealRepository.findAll()).willReturn(Collections.singletonList(typeOfMeal));
-        List<TypeOfMeal> result = typeOfMealService.findAll();
-        assertThat(result).hasSize(1).contains(typeOfMeal);
-    }
-
-    @Test
-    void shouldReturnTypeOfMealForFindById() {
-        TypeOfMeal typeOfMeal = new TypeOfMeal();
-        given(typeOfMealRepository.findById(1L)).willReturn(Optional.of(typeOfMeal));
-
-        TypeOfMeal result = typeOfMealService.findById(1L);
-        assertThat(result).isEqualTo(typeOfMeal);
-
-    }
-
-    @Test
-    void shouldCreateTypeOfMeal() {
-        TypeOfMeal typeOfMeal = TypeOfMeal.builder()
-                .id(1L)
-                .build();
-        given(typeOfMealRepository.save(any())).willReturn(typeOfMeal);
-
-        TypeOfMealID result = typeOfMealService.create(typeOfMeal);
-        assertThat(result).isEqualTo(new TypeOfMealID(1L));
+                .hasMessage(message);
     }
 
     @Test
     void shouldUpdateTypeOfMeal() {
         TypeOfMeal typeOfMeal = new TypeOfMeal();
         given(typeOfMealRepository.save(any())).willReturn(typeOfMeal);
-        given(typeOfMealRepository.findById(1L)).willReturn(Optional.of(typeOfMeal));
+        given(typeOfMealRepository.findById(id)).willReturn(Optional.of(typeOfMeal));
 
-        TypeOfMeal result = typeOfMealService.update(typeOfMeal, 1L);
+        TypeOfMeal result = typeOfMealServiceImpl.update(typeOfMeal, id);
         assertThat(result).isEqualTo(typeOfMeal);
+    }
+
+    @Test
+    void shouldReturnValueForFindById() {
+        TypeOfMeal typeOfMeal = new TypeOfMeal();
+        given(typeOfMealRepository.findById(id)).willReturn(Optional.of(typeOfMeal));
+
+        TypeOfMeal result = typeOfMealServiceImpl.findById(id);
+        assertThat(result).isEqualTo(typeOfMeal);
+    }
+
+    @Test
+    void shouldFindAllTypesOfMeal() {
+        TypeOfMeal typeOfMeal = new TypeOfMeal();
+        given(typeOfMealRepository.findAll()).willReturn(Collections.singletonList(typeOfMeal));
+        List<TypeOfMeal> result = typeOfMealServiceImpl.findAll();
+        assertThat(result).hasSize(1).contains(typeOfMeal);
+    }
+
+    @Test
+    void shouldFindEmptyBodyTypes() {
+        given(typeOfMealRepository.findAll()).willReturn(Collections.emptyList());
+
+        List<TypeOfMeal> result = typeOfMealServiceImpl.findAll();
+        assertThat(result).isEmpty();
+
+    }
+
+    @Test
+    void shouldCreateTypeOfMeal() {
+        TypeOfMeal typeOfMeal = TypeOfMeal.builder()
+                .id(id)
+                .build();
+        given(typeOfMealRepository.save(any())).willReturn(typeOfMeal);
+
+        TypeOfMealID result = typeOfMealServiceImpl.create(typeOfMeal);
+        assertThat(result).isEqualTo(new TypeOfMealID(id));
     }
 
     @Test
     void shouldDeleteTypeOfMeal() {
         doNothing().when(typeOfMealRepository).deleteById(any());
-        typeOfMealService.delete(1L);
-        verify(typeOfMealRepository, times(1)).deleteById(1L);
-    }
-    @Test
-    void shouldFindEmptyBodyTypes() {
-        given(typeOfMealRepository.findAll()).willReturn(Collections.emptyList());
-
-        List<TypeOfMeal> result = typeOfMealService.findAll();
-        assertThat(result).isEmpty();
-
+        typeOfMealServiceImpl.delete(id);
+        verify(typeOfMealRepository, times(1)).deleteById(id);
     }
 
     @Test
     void shouldThrowExceptionDuringDeleteById() {
 
         doThrow(EmptyResultDataAccessException.class).when(typeOfMealRepository).deleteById(any());
-        assertThatThrownBy(() -> typeOfMealService.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
-
-
+        assertThatThrownBy(() -> typeOfMealServiceImpl.delete(any())).isInstanceOf(EmptyResultDataAccessException.class);
     }
-
 }

@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    @Transactional
+    @Transactional // pozwalamy zgadywać uzytkownikow poprawic
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
                 .map(user -> new User(email, user.getPassword(), user.getRoles()
