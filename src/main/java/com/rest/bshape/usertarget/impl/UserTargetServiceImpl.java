@@ -5,6 +5,7 @@ import com.rest.bshape.usertarget.UserTargetService;
 import com.rest.bshape.usertarget.domain.UserTarget;
 import com.rest.bshape.usertarget.domain.UserTargetID;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -37,6 +38,7 @@ class UserTargetServiceImpl implements UserTargetService {
     }
 
     @Override
+    @Transactional // mam 2 operacje, find by id i save dzięki tranzakcyjnosci springowej (jest pod spodem aspektem) wykonają sie na raz obie albo zadna
     public UserTarget update(UserTarget userTarget, Long id) {
         UserTarget userTargetById = userTargetRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(MESSAGE_ERO_NOT_FOUND + id));
