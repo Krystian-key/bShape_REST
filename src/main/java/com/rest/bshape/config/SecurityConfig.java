@@ -29,6 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Wykorzystuje wzorzec Builder, pierwszą funckję wywołuje w tej samej
         // linijce co zmienna lub typ, a każda kolejna funkcja w nowej.
         http.csrf()
+                /*.disable()
+                .authorizeRequests()
+                .antMatchers("/*")
+                .authenticated()
+                .and()
+                .formLogin().loginPage("/login").permitAll()*/
                 .ignoringAntMatchers("/**") // wyłącza nam secuirty na wszystkich endpointach restowych. Zeby cokolwiek dzialalo.
                 .and()
                 .cors()
