@@ -44,7 +44,7 @@ public class BodyTypeServiceImpl implements BodyTypeService {
                 .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
 
         bodyTypeById.setTypeOfBody(bodyType.getTypeOfBody());
-        return bodyTypeRepository.save(bodyTypeById);
+        return bodyTypeRepository.save(findById(id));
     }
 
 

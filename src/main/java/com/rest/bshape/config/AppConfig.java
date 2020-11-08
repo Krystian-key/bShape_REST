@@ -1,7 +1,7 @@
 package com.rest.bshape.config;
 
-import com.rest.bshape.user.domain.Role;
-import com.rest.bshape.user.domain.RoleRepository;
+import com.rest.bshape.user.domain.role.Role;
+import com.rest.bshape.user.domain.role.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

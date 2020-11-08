@@ -60,6 +60,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(eMail, null, grantedAuthorityList);
             SecurityContextHolder.getContext()
                     .setAuthentication(usernamePasswordAuthenticationToken);
+            chain.doFilter(request,response); // tej Linijki brakowało
         } else {
             response.setStatus(401);
         }
