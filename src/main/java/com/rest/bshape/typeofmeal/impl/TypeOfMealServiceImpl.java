@@ -40,11 +40,10 @@ public class TypeOfMealServiceImpl implements TypeOfMealService {
     @Override
     public TypeOfMeal update(TypeOfMeal typeOfMeal, Long id) {
 
-        TypeOfMeal typeOfMealById = typeOfMealRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Type of meal not found with id :" + id));
-
-        typeOfMealById.setTypeMeals(typeOfMeal.getTypeMeals());
-        return typeOfMealRepository.save(typeOfMealById);
+        return typeOfMealRepository.save(findById(id)
+                .toBuilder()
+                .typeMeals(typeOfMeal.getTypeMeals())
+                .build());
     }
 
     @Override

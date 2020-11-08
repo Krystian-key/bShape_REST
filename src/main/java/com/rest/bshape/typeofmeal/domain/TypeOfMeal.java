@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 @Setter
 @Getter
-@Builder
+@Builder (toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")

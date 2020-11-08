@@ -40,24 +40,23 @@ class UserHistoryServiceImpl implements UserHistoryService {
     @Override
     public UserHistory update(UserHistory userHistory, Long id) {
 
-        UserHistory userHistoryById = userHistoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(MESSAGE_ERO_NOT_FOUND + id));
-
-        userHistoryById.setDate(userHistory.getDate());
-        userHistoryById.setWeight(userHistory.getWeight());
-        userHistoryById.setAlcoholEaten(userHistory.getAlcoholEaten());
-        userHistoryById.setAlcoholSchedule(userHistory.getAlcoholSchedule());
-        userHistoryById.setCaloriesEaten(userHistory.getCaloriesEaten());
-        userHistoryById.setCaloriesSchedule(userHistory.getCaloriesSchedule());
-        userHistoryById.setCarbohydratesEaten(userHistory.getCarbohydratesEaten());
-        userHistoryById.setCarbohydratesSchedule(userHistory.getCarbohydratesSchedule());
-        userHistoryById.setFatEaten(userHistory.getFatEaten());
-        userHistoryById.setFatSchedule(userHistory.getFatSchedule());
-        userHistoryById.setGigajouleEaten(userHistory.getGigajouleEaten());
-        userHistoryById.setGigajouleSchedule(userHistory.getGigajouleSchedule());
-        userHistoryById.setProteinEaten(userHistory.getProteinEaten());
-        userHistoryById.setProteinSchedule(userHistory.getProteinSchedule());
-        return userHistoryRepository.save(userHistoryById);
+        return userHistoryRepository.save(findById(id)
+                .toBuilder()
+                .date(userHistory.getDate())
+                .weight(userHistory.getWeight())
+                .alcoholEaten(userHistory.getAlcoholEaten())
+                .alcoholSchedule(userHistory.getAlcoholSchedule())
+                .caloriesEaten(userHistory.getCaloriesEaten())
+                .caloriesSchedule(userHistory.getCaloriesSchedule())
+                .carbohydratesEaten(userHistory.getCarbohydratesEaten())
+                .carbohydratesSchedule(userHistory.getCarbohydratesSchedule())
+                .fatEaten(userHistory.getFatEaten())
+                .fatSchedule(userHistory.getFatSchedule())
+                .gigajouleEaten(userHistory.getGigajouleEaten())
+                .gigajouleSchedule(userHistory.getGigajouleSchedule())
+                .proteinEaten(userHistory.getProteinEaten())
+                .proteinSchedule(userHistory.getProteinSchedule())
+                .build());
     }
 
     @Override

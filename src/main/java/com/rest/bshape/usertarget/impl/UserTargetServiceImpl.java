@@ -40,10 +40,11 @@ class UserTargetServiceImpl implements UserTargetService {
     @Override
     @Transactional // mam 2 operacje, find by id i save dzięki tranzakcyjnosci springowej (jest pod spodem aspektem) wykonają sie na raz obie albo zadna
     public UserTarget update(UserTarget userTarget, Long id) {
-        UserTarget userTargetById = userTargetRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(MESSAGE_ERO_NOT_FOUND + id));
-        userTargetById.setFutureTarget(userTarget.getFutureTarget());
-        return userTargetRepository.save(userTargetById);
+
+        return userTargetRepository.save(findById(id)
+                .toBuilder()
+                .futureTarget(userTarget.getFutureTarget())
+                .build());
     }
 
     @Override

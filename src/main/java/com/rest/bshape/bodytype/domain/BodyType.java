@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Setter
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id") // kwestia ID
