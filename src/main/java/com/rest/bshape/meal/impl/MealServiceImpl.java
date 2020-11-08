@@ -21,7 +21,6 @@ class MealServiceImpl implements MealService {
     @Override
     public List<Meal> findAll() {
         return this.mealRepository.findAll();
-
     }
 
     @Override
@@ -39,11 +38,10 @@ class MealServiceImpl implements MealService {
     @Override
     public Meal update(Meal meal, Long id) {
 
-        Meal mealById = mealRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
-
-        mealById.setMealName(meal.getMealName());
-        return mealRepository.save(mealById);
+        return mealRepository.save(findById(id)
+                .toBuilder()
+                .mealName(meal.getMealName())
+                .build());
     }
 
     @Override

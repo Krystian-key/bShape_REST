@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
-@Builder
+@Builder (toBuilder = true)  // z istniejącego obiektu User mogę stowrzyć builder który ma już ustawione odpowiednie pola, moge je nadpisać poprzez funckje
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")

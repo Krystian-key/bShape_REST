@@ -43,7 +43,7 @@ class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user, Long id) {
-// brak komunikatu o error
+
         return userRepository.save(findById(id)
                 .toBuilder()
                 .firstName(user.getFirstName())

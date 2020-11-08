@@ -40,11 +40,10 @@ public class BodyTypeServiceImpl implements BodyTypeService {
     @Override
     public BodyType update(BodyType bodyType, Long id) {
 
-        BodyType bodyTypeById = bodyTypeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("BodyType not found with id :" + id));
-
-        bodyTypeById.setTypeOfBody(bodyType.getTypeOfBody());
-        return bodyTypeRepository.save(findById(id));
+        return bodyTypeRepository.save(findById(id)
+                .toBuilder()
+                .typeOfBody(bodyType.getTypeOfBody())
+                .build());
     }
 
 

@@ -39,18 +39,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product update(Product product, Long id) {
 
-        Product productById = productRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Product not found with id :" + id));
-
-        productById.setName(product.getName());
-        productById.setWeight(product.getWeight());
-        productById.setGigajoule(product.getGigajoule());
-        productById.setCalories(product.getCalories());
-        productById.setAlcohol(product.getAlcohol());
-        productById.setProtein(product.getProtein());
-        productById.setFat(product.getFat());
-        productById.setCarbohydrates(product.getCarbohydrates());
-        return productRepository.save(productById);
+        return productRepository.save(findById(id)
+                .toBuilder()
+                .name(product.getName())
+                .weight(product.getWeight())
+                .gigajoule(product.getGigajoule())
+                .calories(product.getCalories())
+                .alcohol(product.getAlcohol())
+                .protein(product.getProtein())
+                .fat(product.getFat())
+                .carbohydrates(product.getCarbohydrates())
+                .build());
     }
 
     @Override
