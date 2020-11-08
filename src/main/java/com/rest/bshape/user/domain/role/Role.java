@@ -1,4 +1,4 @@
-package com.rest.bshape.user.domain;
+package com.rest.bshape.user.domain.role;
 
 import lombok.*;
 

@@ -1,17 +1,13 @@
-package com.rest.bshape.user;
+package com.rest.bshape.user.domain;
 
 import com.rest.bshape.bodytype.domain.BodyTypeDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
-public
-class UserDTO {
+@EqualsAndHashCode
+public class UserDTO {
 
     private Long id;
 

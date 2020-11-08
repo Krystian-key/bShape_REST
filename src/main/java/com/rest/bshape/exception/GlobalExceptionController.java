@@ -15,6 +15,8 @@ import java.util.Date;
 
 @ControllerAdvice
 @Slf4j
+@ResponseBody
+// odpowiedzialne za wiadomość do użytkownika
 public class GlobalExceptionController {
 
     // handling specific exception
@@ -28,7 +30,6 @@ public class GlobalExceptionController {
 
     /*  @ExceptionHandler(Exception.class)*/ // brała kazdy wyjątek i zagłuszała je :(
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ResponseBody
     @ExceptionHandler(EntityNotFoundException.class)
     public ErrorDetails globalExceptionHandling(Exception exception, WebRequest request) {
         log.error(exception.getMessage(), exception);
