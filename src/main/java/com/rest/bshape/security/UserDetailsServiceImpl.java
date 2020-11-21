@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
+
 @Service
 @RequiredArgsConstructor // tworzy konstruktor z polem jako argument
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -27,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         .stream()
                         .map(role -> new SimpleGrantedAuthority(role.getName()))
                         .collect(Collectors.toSet())))
-                        .orElseThrow(() -> new UsernameNotFoundException(email));
+                .orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
 

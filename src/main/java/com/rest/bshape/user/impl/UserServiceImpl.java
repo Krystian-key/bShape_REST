@@ -5,14 +5,16 @@ import com.rest.bshape.user.UserRepository;
 import com.rest.bshape.user.UserService;
 import com.rest.bshape.user.domain.User;
 import com.rest.bshape.user.domain.UserID;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 class UserServiceImpl implements UserService {
 
     // Klasy wyzszego rzedu musza korzystac z abstrakcji wyzszego, Stowrzyc interfejs o nazwie user service z
@@ -21,6 +23,8 @@ class UserServiceImpl implements UserService {
     // powininem stworzyc Edvice Controller oznaczone adnotacja AdviceController i tam metody oznaczone adnotacjami exception handler i tam zwracac statusy.
 
     private final UserRepository userRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> findAll() {
@@ -36,6 +40,7 @@ class UserServiceImpl implements UserService {
 
     @Override
     public UserID create(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
         return new UserID(user.getId());
     }

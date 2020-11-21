@@ -17,5 +17,6 @@ public class AppInitializer {
 
 
 	//http://localhost:8092/swagger-ui.html wchodzę pod ten adres i widzę controlery i mogę testować rest api
-
+	// default SpringSecurity login auth
+	// login: user a hasło generuje wam sie w consoli
 }
