@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode
+@Setter
 public class UserDTO {
 
     private Long id;
