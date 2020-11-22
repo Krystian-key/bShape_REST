@@ -32,10 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable().cors().and()
                 .authorizeRequests()
-                .antMatchers("/**")
-                .permitAll()
                 .antMatchers("/api/**")
                 .authenticated()
+                .antMatchers("/","/*.html","/**")
+                .permitAll()
                 .anyRequest().authenticated()
                 //.ignoringAntMatchers("/**") // wyłącza nam secuirty na wszystkich endpointach restowych. Zeby cokolwiek dzialalo.
                 .and()
