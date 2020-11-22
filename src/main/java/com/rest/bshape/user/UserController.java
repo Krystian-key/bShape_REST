@@ -4,6 +4,7 @@ package com.rest.bshape.user;
 import com.rest.bshape.user.domain.UserDTO;
 import com.rest.bshape.user.domain.UserID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
