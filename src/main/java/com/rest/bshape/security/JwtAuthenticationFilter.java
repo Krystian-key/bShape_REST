@@ -7,7 +7,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -24,9 +26,9 @@ import static java.util.stream.Collectors.joining;
 
 // glasa do generowania tokenów po poprawnym zalogowanu
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
+    private AuthenticationManager authenticationManager;
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
-        setAuthenticationManager(authenticationManager);
+        this.setAuthenticationManager(authenticationManager);
         setUsernameParameter("email"); // loguje sie po emailu , default username
 
     }
@@ -53,8 +55,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         // wykorzystuje Singletonowa mape, oraz ObjectMapper ktora parsuje i rozparosowywuje Jsony,  parujsemy mape na jsona tworze mape z jednym wpisem.
         new ObjectMapper().writeValue(response.getWriter(), Collections.singletonMap("token", token));
-
-
 
     }
 }
