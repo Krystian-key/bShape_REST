@@ -29,15 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Wykorzystuje wzorzec Builder, pierwszą funckję wywołuje w tej samej
         // linijce co zmienna lub typ, a każda kolejna funkcja w nowej.
-        http.csrf()
-                .disable().cors().and()
-                .authorizeRequests()
-                .antMatchers("/api/**")
-                .authenticated()
-                .antMatchers("/","/*.html","/**")
-                .permitAll()
-                .anyRequest().authenticated()
-                //.ignoringAntMatchers("/**") // wyłącza nam secuirty na wszystkich endpointach restowych. Zeby cokolwiek dzialalo.
+          http.csrf()
+                .ignoringAntMatchers("/**") // wyłącza nam secuirty na wszystkich endpointach restowych. Zeby cokolwiek dzialalo.
+                .and()
+                .cors()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager()))
@@ -46,8 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // cały rest poiwnien byc bezstanowy czyli nie przechowywac info o poprzednich requestach
 
 
-
     }
+
+    // /login
+    // w body pod form-data podaje dane logowania
+
+    // uster do testów
+    // p: testertestowy
+    // login: test@123.interia.pl
+    // adnotacja preAuthorize w każdym controllerze które wymagają
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

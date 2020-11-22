@@ -47,7 +47,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         //tworze pusta liste
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
         //sprawdzam czy jest rozne od nula,jestli jest to ma role ktora wrzucam do listy
-        if (authorities != null) {
+        if (authorities != null && !authorities.isEmpty()) {
             // splituje strina po przecinku, wrzucam tablice do strumienia, mapuje i wrzucam do listy
             grantedAuthorityList = Arrays.stream(authorities.split(","))
                     .map(SimpleGrantedAuthority::new) // metoda referencyna

@@ -86,11 +86,24 @@
             <version>3.0.0</version>
         </dependency>
 
-<!--        actuator pokazuje dostepne endpointy i stan bazy danych etc-->
+<dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>1.6.1</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt Spring security z tokenem -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

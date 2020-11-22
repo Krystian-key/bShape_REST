@@ -4,6 +4,7 @@ package com.rest.bshape.user;
 import com.rest.bshape.user.domain.UserDTO;
 import com.rest.bshape.user.domain.UserID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import static com.rest.bshape.user.converter.UserConverter.*;
 
-
+@PreAuthorize("isAuthenticated()")
 @RestController
 @RequestMapping("/api/user")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
 @CrossOrigin(origins = "http://localhost:4200")
