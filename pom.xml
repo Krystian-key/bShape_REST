@@ -86,7 +86,7 @@
             <version>3.0.0</version>
         </dependency>
 
-        //
+<!--        actuator pokazuje dostepne endpointy i stan bazy danych etc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
