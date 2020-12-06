@@ -5,6 +5,7 @@ import com.rest.bshape.user.domain.UserDTO;
 import com.rest.bshape.user.domain.UserID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,7 +13,7 @@ import java.util.List;
 
 import static com.rest.bshape.user.converter.UserConverter.*;
 
-@PreAuthorize("isAuthenticated()")
+@PreAuthorize("isAuthenticated()") //tylko dla zalogowanego ta adnotacja
 @RestController
 @RequestMapping("/api/user")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
 @CrossOrigin(origins = "http://localhost:4200")
@@ -35,6 +36,7 @@ class UserController {
 
     }
 
+    @PreAuthorize("isAnonymous()")
     @PostMapping
     public UserID create(@RequestBody @Valid UserDTO userDTO) { //valid = włącza walidacje na klasie dto
         return userService.create(convertFromDTO(userDTO));

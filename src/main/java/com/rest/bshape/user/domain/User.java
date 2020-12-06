@@ -11,10 +11,11 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
-@Builder (toBuilder = true)  // z istniejącego obiektu User mogę stowrzyć builder który ma już ustawione odpowiednie pola, moge je nadpisać poprzez funckje
+@Builder(toBuilder = true)
+// z istniejącego obiektu User mogę stowrzyć builder który ma już ustawione odpowiednie pola, moge je nadpisać poprzez funckje
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of = "id")
 public class User {
 
     @Id
@@ -46,7 +47,7 @@ public class User {
     @Size(min = 5, max = 30)
     private String email;
 
-//    @Transient // ignoring this field when adding new 'User' to database. Probably causing mistake in future.
+    //    @Transient // ignoring this field when adding new 'User' to database. Probably causing mistake in future.
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private BodyType bodyType;
 
