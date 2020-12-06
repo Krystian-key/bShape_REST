@@ -5,6 +5,7 @@ import com.rest.bshape.user.domain.UserDTO;
 import com.rest.bshape.user.domain.UserID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

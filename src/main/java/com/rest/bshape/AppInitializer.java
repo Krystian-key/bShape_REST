@@ -20,4 +20,10 @@ public class AppInitializer {
 	// default SpringSecurity login auth
 	// login: user a hasło generuje wam sie w consoli
 	// http://localhost:8090/actuator/prometheus podgląd metryk
+
+	//
+	// http://localhost:8090/actuator/prometheus - wystawienie aktualnych metryk aplikacji
+	// http://localhost:9090/graph - prometheus - w puste pole wpisuje nazwa metryki i otrzymuje o niej dane
+	// http://localhost:3000/ - monitoring (login admin, admin) (klikam + import ID 4701 )
+	// https://grafana.com/grafana/dashboards?search=Spring%20boot&orderBy=downloads&direction=desc - wszystkie dashbordy
 }

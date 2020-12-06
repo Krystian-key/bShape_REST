@@ -51,6 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // login: test@123.interia.pl
     // adnotacja preAuthorize w każdym controllerze które wymagają
 
+    // http://localhost:8090/actuator/prometheus
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);

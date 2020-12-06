@@ -2,7 +2,9 @@ package com.rest.bshape.config;
 
 import com.rest.bshape.user.domain.role.Role;
 import com.rest.bshape.user.domain.role.RoleRepository;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,6 +31,7 @@ public class AppConfig {
             }
         };
     }
+
 
     // dorobić Admina lub inne role
 }
