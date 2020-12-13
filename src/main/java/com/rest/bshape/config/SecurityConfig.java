@@ -4,7 +4,6 @@ import com.rest.bshape.security.JwtAuthenticationFilter;
 import com.rest.bshape.security.JwtAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // uster do testów
     // p: testertestowy
     // login: test@123.interia.pl
+    // Usnername do DB AWS : AndrzejTester
+    // Haslo do DB AWS : SuperSecretPassword12345678910$!
     // adnotacja preAuthorize w każdym controllerze które wymagają
 
     // http://localhost:8090/actuator/prometheus

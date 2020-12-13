@@ -18,7 +18,7 @@
     <name>bShape_REST</name>
 
     <properties>
-        <java.version>14</java.version>
+        <java.version>11</java.version>
     </properties>
 
 

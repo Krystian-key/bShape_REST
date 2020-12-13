@@ -26,4 +26,12 @@ public class AppInitializer {
 	// http://localhost:9090/graph - prometheus - w puste pole wpisuje nazwa metryki i otrzymuje o niej dane
 	// http://localhost:3000/ - monitoring (login admin, admin) (klikam + import ID 4701 )
 	// https://grafana.com/grafana/dashboards?search=Spring%20boot&orderBy=downloads&direction=desc - wszystkie dashbordy
+	// krystian db test MarianTester@123.pl marian123321123
+
+	// uster do testów
+	// p: testertestowy
+	// login: test@123.interia.pl
+	// Usnername do DB AWS : AndrzejTester
+	// Haslo do DB AWS : SuperSecretPassword12345678910$!
+	// adnotacja preAuthorize w każdym controllerze które wymagają
 }
