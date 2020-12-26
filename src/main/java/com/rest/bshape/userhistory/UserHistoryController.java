@@ -11,7 +11,6 @@ import static com.rest.bshape.userhistory.converter.UserHistoryConverter.*;
 
 @RestController
 @RequestMapping("/api/user-history")
-@CrossOrigin(origins = "http://localhost:4200")
 class UserHistoryController {
 
     private final UserHistoryService userHistoryService;

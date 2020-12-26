@@ -14,7 +14,6 @@ import static com.rest.bshape.typeofmeal.converter.TypeOfMealConverter.*;
 
 @RestController
 @RequestMapping("/typeOfMeals")
-@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class TypeOfMealController {
 

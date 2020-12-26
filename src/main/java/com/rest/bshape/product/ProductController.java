@@ -14,7 +14,6 @@ import static com.rest.bshape.product.converter.ProductConverter.*;
 
 @RestController
 @RequestMapping("/api/product")
-@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 class ProductController {
 

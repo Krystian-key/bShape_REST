@@ -16,7 +16,6 @@ import static com.rest.bshape.user.converter.UserConverter.*;
 @PreAuthorize("isAuthenticated()") //tylko dla zalogowanego ta adnotacja
 @RestController
 @RequestMapping("/api/user")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
-@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 class UserController {
 
