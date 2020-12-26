@@ -12,7 +12,6 @@ import static com.rest.bshape.meal.converter.MealConverter.*;
 
 @RestController
 @RequestMapping("/api/meal")  // linki kebab keysem i api bo to restowe i musze to oznaczyc + mozna wersje api
-@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 class MealController {
 

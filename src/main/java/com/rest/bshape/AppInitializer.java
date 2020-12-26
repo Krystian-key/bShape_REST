@@ -34,4 +34,13 @@ public class AppInitializer {
 	// Usnername do DB AWS : AndrzejTester
 	// Haslo do DB AWS : SuperSecretPassword12345678910$!
 	// adnotacja preAuthorize w każdym controllerze które wymagają
+
+	// beanStalk mam adres do servera (narzędzie do usługi z serverwa)
+	// EC2 na TYm jest serwer
+	// S3 bucket (na tym odpalam front i w properties mam linka do serverwa który serwuje statyczny kontent)
+	// aws baza danych RDS
+	// wchodzę w databases wybieram bazę danych + wchodzę w security group od mojej bazdy danych link po prawej + action (edit inbound rules)
+	// na koniec podłaczam się przez link do bazdy danych w workbenchu hasło do db aws mam zapisane
+	// stefanBatory123@interia.pl stefanBatory123
+	//
 }

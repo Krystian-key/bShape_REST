@@ -12,7 +12,6 @@ import static com.rest.bshape.usertarget.converter.UserTargetConverter.*;
 
 @RestController
 @RequestMapping("/api/user-target")
-@CrossOrigin(origins = "http://localhost:4200")
 class UserTargetController {
 
     private final UserTargetService userTargetService;
